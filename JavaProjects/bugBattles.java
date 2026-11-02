@@ -45,14 +45,19 @@ abstract class bug {
             bugBattles.gameBoard[targetSide][targetSpot].defeat();
         }
         if (this.stam < 0){
+            System.out.println(this.name + " was defeated!");
             this.defeat();
         }
     }//declare attack
 
     public void defeat(){
         if (this.isPlayerSide){
+            System.out.println(bugBattles.gameBoard[1][this.position].name + 
+                                " was defeated!");
             bugBattles.gameBoard[1][this.position] = null;
         } else {
+            System.out.println(bugBattles.gameBoard[0][this.position].name + 
+                                " was defeated!");
             bugBattles.gameBoard[0][this.position] = null;
         }
     }
