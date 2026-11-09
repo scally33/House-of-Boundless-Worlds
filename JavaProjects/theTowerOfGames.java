@@ -1,16 +1,91 @@
 import java.util.*;
 public class theTowerOfGames{
+    int playerScore = 0;
+    String playerName = "";
+    String playerPassword = "";
     public void main(String [] args){
+        boolean playerWin;
         //make a thingy that stores player files
         //put a thingy sequencing through all the games here
         //if a player screws up a game, the game should return false and boot them
         //maybe make a score tracker for the player to add to the file
         //at that point, maybe also make usernames to get player data from the file
+
+        //make a menu asking what do you want to do
+        gameStart();
+        playerWin = jokerDoom();
+        if (playerWin){
+            ascendAnimation();
+            playerWin = duelOfFate();
+        }
+        if (playerWin){
+            ascendAnimation();
+            playerWin = hangman();
+        }
+        if (playerWin){
+            //playerWin = battleOfTechWizards();
+            //In this game, you can build various spells using stuff from java
+            //programming :v
+            //Each round, you are given 5 random code blocks to build a spell. When you
+            //finish, the spell you and your opponent made are put up against on another.
+            //The winner is determined by who's spell had a higher power score - in some
+            //cases, you can make defensive spells that have a defense score. If your
+            //defense score is higher than the opponent's power score, you win. Two
+            //defensive spells lead to a round draw.
+            //The winne of 5 rounds wins the whole thing!
+        }
+        if (playerWin){
+            //playerWin = inkOff();
+            //In this game, you have a random amount of starting ink and a random set of 
+            //3 ink techniques, each dealing damage and costing ink. You also have a 
+            //standard attack and 100 HP. 
+            //Each turn, you may either standard attack, use one of your ink skills, or
+            //add ink to the environment. 
+            // - Your standard attack deals a set amount of damage to the opponent.
+            // - Your ink techniques have various effects, some boosting your damage,
+            //      covering your hp in a shield, disrupting the enemy, or just dealing
+            //      more damage. They add their ink cost to the environment when used.
+            // - Adding ink to the environment adds ink to the environment. Ink in the
+            //      environment can be used by either the player or opponent, allowing
+            //      for larger ink techniques to be used, but making things riskier.
+            //
+        }
+        if  (playerWin){
+            //playerWin = fitFight();
+            //This game is about making a better outfit than the bot. You both choose
+            //from a catalog of clothes each turn, going 5 rounds. Clothes have properties,
+            //and your fit score is based on how you can match those properties. If you
+            //and the bot choose the same piece of clothing, you rock paper scissors for it.
+            //The loser gets second pick.
+            
+        }
         
+    }
+
+    public void gameStart(){
+        typeWriter("So...");
+        typeWriter("you wish to enter the tower of games...? (y/n)");
+        Scanner console = new Scanner(System.in);
+        yesNo(console.next());
         
-        
-        
-        
+        typeWriter("You are a brave soul...! I bid thee good luck, traveler. What is your" +
+                    " name?");
+        playerName = console.next();
+        // if the player name is in the csv, ask them for their password and set their data
+        // otherwise, do the thing below
+        typeWriter(playerName + "... Good luck.");
+        System.out.println("Would you like to set a password? (y/n");
+        yesNo(console.next());
+        console.close();
+    }
+    public String yesNo(String input){
+        Scanner console = new Scanner(System.in);
+        while (!input.toLowerCase().equals("y") || !input.toLowerCase().equals("n")){
+            System.out.println("Please type in 'y' or 'n'. Try again.");
+            input = console.next();
+        }
+        console.close();
+        return input;
     }
     
     
@@ -20,6 +95,7 @@ public class theTowerOfGames{
         boolean isTie = false;
         do{
             isTie = false;
+            typeWriter(playerName.toUpperCase() +"!!!");
             typeWriter("Before you are 5 cards...");
             typeWriter("One of them are the Joker of Doom, and the others\nare black and red. If you");
             typeWriter("pick a matching pair or have your opponent pick the joker, and you win!");
@@ -200,8 +276,8 @@ public class theTowerOfGames{
                     typeWriter("...So a draw. We'll have to play again.");
                 }
             }
+            console.close();
         } while (isTie);
-        
         if (isWin){
             System.out.println("YOU WIN! TO THE NEXT FLOOR!");
             return isWin;
@@ -210,7 +286,7 @@ public class theTowerOfGames{
             return isWin;
         }
     }
-    public String[] jokerRandomizer(String[] s){
+    private String[] jokerRandomizer(String[] s){
         Random r = new Random();
         String temp;
         int shuffleCount = r.nextInt(50)+1;
@@ -223,7 +299,7 @@ public class theTowerOfGames{
         }
         return s;
     }
-    public void printCards(String[] cards){
+    private void printCards(String[] cards){
         System.out.println();
         if (!cards[0].isEmpty()){
             System.out.print("------");
@@ -512,7 +588,6 @@ public class theTowerOfGames{
             
             
         } while (guessCount > 0);
-        
         
     }
     
