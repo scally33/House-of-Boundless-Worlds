@@ -44,7 +44,9 @@ public class theTowerOfGames{
             // - Your standard attack deals a set amount of damage to the opponent.
             // - Your ink techniques have various effects, some boosting your damage,
             //      covering your hp in a shield, disrupting the enemy, or just dealing
-            //      more damage. They add their ink cost to the environment when used.
+            //      more damage. You always use ink from the environment if there is
+            //      enough in the environment to cover the cost. Any ink used from your
+            //      reserve is added to the environment after, and your reserve depletes.
             // - Adding ink to the environment adds ink to the environment. Ink in the
             //      environment can be used by either the player or opponent, allowing
             //      for larger ink techniques to be used, but making things riskier.
@@ -352,8 +354,8 @@ public class theTowerOfGames{
         System.out.println();
         System.out.println();
     }
-    //JOKER OF DOOM - END
-    //================================================================================================================
+//JOKER OF DOOM - END
+//================================================================================================================
     
     public boolean duelOfFate(){
         //make S.o.p into typerWriter for some of em
@@ -514,8 +516,8 @@ public class theTowerOfGames{
         System.out.println("-------");
         typeWriter("\n\n\n");
     }
-    // DUEL OF FATE - END
-    //================================================================================================================
+// DUEL OF FATE - END
+//================================================================================================================
     
     public boolean hangman(){
         typeWriter("Third floor already? Not bad, player.");
@@ -523,11 +525,11 @@ public class theTowerOfGames{
         typeWriter("As a reminder of the rules, I have a phrase with blanks representing letters.");
         typeWriter("You can enter a letter, and if it's in the phrase, it will reveal");
         typeWriter("all of its instances present.");
-        typeWriter("You must guess the phrase within 7 guesses. \n**Guessing the phrase counts as a guess, so be sure to save one!**.");
+        typeWriter("You must guess the phrase within 7 guesses. \n**Guessing the phrase counts as a guess, so be sure to save a guess!**.");
         
         Random r = new Random();
         Scanner console = new Scanner(System.in);
-        int selection = r.nextInt(10)+1;
+        int selection = r.nextInt(10);
         int guessCount = 7;
         String phrase;
         String guess;
@@ -552,8 +554,6 @@ public class theTowerOfGames{
         } else {
             phrase = "Piece of cake";
         }
-        
-        
         
         String [] phraseWords = new String[wordCount(phrase)];
         phraseWords = toWords(phraseWords, phrase);
