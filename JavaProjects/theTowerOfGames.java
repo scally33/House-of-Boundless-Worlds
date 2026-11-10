@@ -12,82 +12,93 @@ public class theTowerOfGames{
         //at that point, maybe also make usernames to get player data from the file
 
         //make a menu asking what do you want to do
-        gameStart();
-        playerWin = jokerDoom();
-        if (playerWin){
+        boolean startGame = gameStart();
+        if (startGame){
             ascendAnimation();
-            playerWin = duelOfFate();
+            playerWin = jokerDoom();
+            if (playerWin){
+                ascendAnimation();
+                playerWin = duelOfFate();
+            }
+            if (playerWin){
+                //ascendAnimation();
+                //playerWin = hangman();
+            }
+            if (playerWin){
+                //playerWin = battleOfTechWizards();
+                //In this game, you can build various spells using stuff from java
+                //programming :v
+                //Each round, you are given 5 random code blocks to build a spell. When you
+                //finish, the spell you and your opponent made are put up against on another.
+                //The winner is determined by who's spell had a higher power score - in some
+                //cases, you can make defensive spells that have a defense score. If your
+                //defense score is higher than the opponent's power score, you win. Two
+                //defensive spells lead to a round draw.
+                //The winne of 5 rounds wins the whole thing!
+            }
+            if (playerWin){
+                //playerWin = inkOff();
+                //In this game, you have a random amount of starting ink and a random set of 
+                //3 ink techniques, each dealing damage and costing ink. You also have a 
+                //standard attack and 100 HP. 
+                //Each turn, you may either standard attack, use one of your ink skills, or
+                //add ink to the environment. 
+                // - Your standard attack deals a set amount of damage to the opponent.
+                // - Your ink techniques have various effects, some boosting your damage,
+                //      covering your hp in a shield, disrupting the enemy, or just dealing
+                //      more damage. You always use ink from the environment if there is
+                //      enough in the environment to cover the cost. Any ink used from your
+                //      reserve is added to the environment after, and your reserve depletes.
+                // - Adding ink to the environment adds ink to the environment. Ink in the
+                //      environment can be used by either the player or opponent, allowing
+                //      for larger ink techniques to be used, but making things riskier.
+                //
+            }
+            if  (playerWin){
+                //playerWin = fitFight();
+                //This game is about making a better outfit than the bot. You both choose
+                //from a catalog of clothes each turn, going 5 rounds. Clothes have properties,
+                //and your fit score is based on how you can match those properties. If you
+                //and the bot choose the same piece of clothing, you rock paper scissors for it.
+                //The loser gets second pick.
+                
+            }
         }
-        if (playerWin){
-            ascendAnimation();
-            playerWin = hangman();
-        }
-        if (playerWin){
-            //playerWin = battleOfTechWizards();
-            //In this game, you can build various spells using stuff from java
-            //programming :v
-            //Each round, you are given 5 random code blocks to build a spell. When you
-            //finish, the spell you and your opponent made are put up against on another.
-            //The winner is determined by who's spell had a higher power score - in some
-            //cases, you can make defensive spells that have a defense score. If your
-            //defense score is higher than the opponent's power score, you win. Two
-            //defensive spells lead to a round draw.
-            //The winne of 5 rounds wins the whole thing!
-        }
-        if (playerWin){
-            //playerWin = inkOff();
-            //In this game, you have a random amount of starting ink and a random set of 
-            //3 ink techniques, each dealing damage and costing ink. You also have a 
-            //standard attack and 100 HP. 
-            //Each turn, you may either standard attack, use one of your ink skills, or
-            //add ink to the environment. 
-            // - Your standard attack deals a set amount of damage to the opponent.
-            // - Your ink techniques have various effects, some boosting your damage,
-            //      covering your hp in a shield, disrupting the enemy, or just dealing
-            //      more damage. You always use ink from the environment if there is
-            //      enough in the environment to cover the cost. Any ink used from your
-            //      reserve is added to the environment after, and your reserve depletes.
-            // - Adding ink to the environment adds ink to the environment. Ink in the
-            //      environment can be used by either the player or opponent, allowing
-            //      for larger ink techniques to be used, but making things riskier.
-            //
-        }
-        if  (playerWin){
-            //playerWin = fitFight();
-            //This game is about making a better outfit than the bot. You both choose
-            //from a catalog of clothes each turn, going 5 rounds. Clothes have properties,
-            //and your fit score is based on how you can match those properties. If you
-            //and the bot choose the same piece of clothing, you rock paper scissors for it.
-            //The loser gets second pick.
-            
-        }
-        
     }
 
-    public void gameStart(){
+    public boolean gameStart(){
         typeWriter("So...");
         typeWriter("you wish to enter the tower of games...? (y/n)");
         Scanner console = new Scanner(System.in);
-        yesNo(console.next());
+        boolean response = yesNo(console.next());
         
-        typeWriter("You are a brave soul...! I bid thee good luck, traveler. What is your" +
+        if (response){
+            typeWriter("You are a brave soul. I bid thee good luck, traveler... What is your" +
                     " name?");
-        playerName = console.next();
-        // if the player name is in the csv, ask them for their password and set their data
-        // otherwise, do the thing below
-        typeWriter(playerName + "... Good luck.");
-        System.out.println("Would you like to set a password? (y/n");
-        yesNo(console.next());
-        console.close();
+            playerName = console.next();
+            // if the player name is in the csv, ask them for their password and set their data
+            // otherwise, do the thing below
+            typeWriter(playerName + "... Good luck.");
+            System.out.println("Would you like to set a password? (y/n)");
+            yesNo(console.next());
+            return true;
+        }
+        else {
+            typeWriter("An understandable choice indeed...");
+            console.close();
+            return false;
+        }
     }
-    public String yesNo(String input){
+    public boolean yesNo(String input){
         Scanner console = new Scanner(System.in);
-        while (!input.toLowerCase().equals("y") || !input.toLowerCase().equals("n")){
+        while (!input.toLowerCase().equals("y") && !input.toLowerCase().equals("n")){
             System.out.println("Please type in 'y' or 'n'. Try again.");
             input = console.next();
         }
-        console.close();
-        return input;
+        if (input.toLowerCase().equals("y")){
+            return true;
+        }
+        return false;
     }
     
     
@@ -95,13 +106,14 @@ public class theTowerOfGames{
         //make S.o.p into typerWriter for some of em
         boolean isWin = false;
         boolean isTie = false;
-        do{
+        
             isTie = false;
             typeWriter(playerName.toUpperCase() +"!!!");
             typeWriter("Before you are 5 cards...");
             typeWriter("One of them are the Joker of Doom, and the others\nare black and red. If you");
             typeWriter("pick a matching pair or have your opponent pick the joker, and you win!");
             typeWriter("Simple, right?");
+        do {
             String[] cards = {"Red", "Red", "Black", "Black", "Joker"};
             cards = jokerRandomizer(cards);
             int[] playerPicks = new int[2];
@@ -147,6 +159,7 @@ public class theTowerOfGames{
             } while (!isValidBotPick);
             
             do{
+                isTie = false;
                 typeWriter("Pick another card, any other card! (Enter a number, 1(left) to 5(right)");
                 int pick2 = console.nextInt();
                 if ((pick2 > 5 || pick2 < 1) || (pick2 == playerPicks[0] || pick2 == botPicks[0] || pick2 == botPicks[1])){
@@ -278,7 +291,6 @@ public class theTowerOfGames{
                     typeWriter("...So a draw. We'll have to play again.");
                 }
             }
-            console.close();
         } while (isTie);
         if (isWin){
             System.out.println("YOU WIN! TO THE NEXT FLOOR!");
@@ -367,7 +379,7 @@ public class theTowerOfGames{
         typeWriter("defender's health decreases by the difference; defeat your opponent or have more HP when the deck");
         typeWriter("runs out! You each have 12 HP.");
         typeWriter("** Defense does not stack (higher values override instead) **");
-        typeWriter("Good luck...!!\n\n\n\n");
+        typeWriter("Good luck...!!                                        \n\n\n\n");
         
         int playerHP = 12;
         int botHP = 12;
@@ -430,23 +442,17 @@ public class theTowerOfGames{
             } else {
                 //bot's turn
                 boolean attacks = false;
-                boolean defends = false;
                 if (playerHP <= 3 || botDef >= 5 || (playerDef >= 5 && botHP >= 6)){
                     attacks = true;
-                    defends = false;
                 } else if (botHP <= 6){
-                    defends = true;
                     attacks = false;
                 } else if (cardCount < 10){
                     attacks = true;
-                    defends = false;
                 }else {
                     int rVal = (int)Math.random();
                     if (rVal == 0){
                         attacks = true;
-                        defends = false;
                     } else {
-                        defends = true;
                         attacks = false;
                     }
                 }
@@ -588,7 +594,7 @@ public class theTowerOfGames{
             
             
         } while (guessCount > 0);
-        
+        return false;
     }
     
     public String hangmanBoardBuilder(String board, String phrase, String test){
